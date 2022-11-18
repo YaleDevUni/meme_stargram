@@ -1,0 +1,15 @@
+{
+  "name": "meme_stargram",
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "react-is": "^18.2.0"
+  },
+  "private": true,
+  "workspaces": [
+    "client"
+  ],
+  "devDependencies": {
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-react-app": "^7.0.1"
+  }
+}
