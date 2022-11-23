@@ -1,7 +1,4 @@
 {
   "name": "meme_stargram",
-  "private": true,
-  "workspaces": [
-    "client"
-  ]
+  "private": true
 }
