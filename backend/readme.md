@@ -3,7 +3,9 @@ Some helpful command before run backend
 - To install and run virtual machine...
     - mac:
         1. python -m venv venv
-            ''' python -m venv my_venv '''
+            ```bash
+            python -m venv my_venv
+            ```
         2. source <venv>/bin/activate
             ''' source my_venv/bin/activate '''
     - windows:
