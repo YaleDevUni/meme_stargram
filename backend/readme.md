@@ -3,9 +3,9 @@ Some helpful command before run backend
 - To install and run virtual machine...
     - mac:
         1. python -m venv venv
-            ex) python -m venv my_venv
+            ''' python -m venv my_venv '''
         2. source <venv>/bin/activate
-            ex)source my_venv/bin/activate
+            ''' source my_venv/bin/activate '''
     - windows:
         1. c:\>c:\Python35\python -m venv c:\path\to\myenv
         2. C:\> <venv>\Scripts\activate.bat
