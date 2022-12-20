@@ -28,16 +28,15 @@ function GroupList() {
   if(error) return <h1>Error</h1>
   if(loading) return <h1>Loading</h1>
   return (
-    <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-      <p className="text-3xl text-gray-700 font-bold mb-5">
-        Welcome!
-      </p>
-      <p className="text-gray-500 text-lg">
-        React and Tailwind CSS in action
-      </p>
+    <div className="container mx-auto bg-green-200 rounded-xl shadow border p-12 m-10">
       <p className="text-blue-600 text-lg">
         {groups&&groups.map(group=>{
-          return <p>{group.name}</p>
+            return <div>
+                <p>user: {group.name}</p>
+                <img src={group.img_url} alt="test" width="100" height="100"></img>
+                <p>{group.description}</p>
+                <p className='text-red-600'>{group.datetime}</p>
+            </div>
         })}
       </p>
     </div>

@@ -1,5 +1,13 @@
-Some helpful command before run backend 
+Temporary posting api: http://127.0.0.1:8000/api/groups/?format=api
 
+To run backend 
+
+```
+sh run.sh
+```
+or
+
+Manual Method
 - To install and run virtual machine...
     - mac:
         1. python -m venv venv

@@ -4,5 +4,5 @@ from .models import Group
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    field = ('name','location','description')
-    list_display = ('id','name','location','description')
+    field = ('name','img_url','description','tag','datetime')
+    list_display = ('id','name','img_url','description','tag','datetime')
