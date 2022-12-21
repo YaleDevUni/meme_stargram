@@ -1,5 +1,7 @@
-import React from 'react';
+// import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
+import GroupList from './components/group_list';
 // import './App.css';
 
 function App() {
@@ -11,7 +13,10 @@ function App() {
       <p className="text-gray-500 text-lg">
         React and Tailwind CSS in action
       </p>
+      <GroupList />
     </div>
+  
+  
   );
 }
 
