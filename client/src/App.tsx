@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import { Navbar } from './component/navbar';
-import './App.css';
+import GroupList from './components/group_list';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navbar is_signed_in={false} name={"Paul"} new_alarm={3}/>
-      </header>
+    <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
+      <p className="text-3xl text-gray-700 font-bold mb-5">
+        Welcome!
+      </p>
+      <p className="text-gray-500 text-lg">
+        React and Tailwind CSS in action
+      </p>
+      <GroupList />
     </div>
+  
+  
   );
 }
 
