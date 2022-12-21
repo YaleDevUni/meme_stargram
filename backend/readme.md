@@ -33,8 +33,28 @@ Manual Method
         py -m pip install -r requirements.txt
         ```
 
+To apply new migrations
+
+```
+sh migrate.sh
+```
+or
 
 - Before excute below command, change directory to backend folder
+    - Install and run virtual machine
+        - mac:
+            1. python -m venv venv
+                ```bash
+                python -m venv my_venv
+                ```
+            2. source <venv>/bin/activate
+                ```bash
+                source my_venv/bin/activate 
+            ```
+        - windows:
+            1. c:\>c:\Python3\python -m venv c:\path\to\myenv
+            2. C:\> <venv>\Scripts\activate.bat
+
     - migrate configuration
     ```
     python3 manage.py makemigration
