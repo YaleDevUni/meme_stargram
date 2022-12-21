@@ -11,6 +11,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "babel-plugin-relay": "^14.1.0",
+    "onchange": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
@@ -22,7 +23,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier-format": "prettier --config .prettierrc './src/**/*.{tsx,ts}' --write",
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}",
+    "dev": "react-scripts start & onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +48,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "postcss-import": "^15.1.0",
     "postcss-nesting": "^10.2.0",
     "prettier": "^2.8.1",
