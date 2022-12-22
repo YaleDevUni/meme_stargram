@@ -1,6 +1,6 @@
 // import React from 'react';
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from 'react';
+import logo from './logo.svg';
 // import './App.css';
 
 function GroupList() {
@@ -44,6 +44,7 @@ function GroupList() {
                 ></img>
                 <p>{group.description}</p>
                 <p className="text-red-600">{group.datetime}</p>
+                <p>this is my tag {group.tag}</p>
               </div>
             );
           })}
