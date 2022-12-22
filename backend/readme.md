@@ -50,7 +50,7 @@ or
             2. source <venv>/bin/activate
                 ```bash
                 source my_venv/bin/activate 
-            ```
+                ```
         - windows:
             1. c:\>c:\Python3\python -m venv c:\path\to\myenv
             2. C:\> <venv>\Scripts\activate.bat

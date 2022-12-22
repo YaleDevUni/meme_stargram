@@ -1,7 +1,7 @@
 .yarn
 .venv
 node_modules
+__pycache__
+build
 db.sqlite3
-pip-log.txt
-build/
-__pycache__/
+*.pyc

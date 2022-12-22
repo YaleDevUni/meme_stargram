@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 // import './App.css';
-
+// test
 function GroupList() {
   const [groups, setGroups] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -44,6 +44,7 @@ function GroupList() {
                 ></img>
                 <p>{group.description}</p>
                 <p className="text-red-600">{group.datetime}</p>
+                <p>this is my tag {group.tag}</p>
               </div>
             );
           })}
@@ -51,5 +52,5 @@ function GroupList() {
     </div>
   );
 }
-
+// test
 export default GroupList;
