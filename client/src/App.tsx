@@ -8,9 +8,19 @@ function App() {
     <div className="container m-10 mx-auto rounded-xl border bg-gray-200 p-8 shadow">
       <div className="grid grid-cols-12">
         <div className="border2 col-span-3">
-          <p className="...mb-5 isolate border-2 border-sky-500 text-3xl font-bold text-gray-700">
-            Modal Zone
-          </p>
+          //Testing Modal effect with Image
+          <div className="flex flex-wrap">
+            <img
+              src="https://storage.googleapis.com/jjalbot/2018/12/H1478pEzeE/20180927_5bac4f495aa35.png"
+              alt="..."
+            />
+            <p className="...mb-5 isolate border-2 border-sky-500 text-3xl font-bold text-gray-700 backdrop-opacity-10 transition-transform">
+              Modal Zone
+            </p>
+          </div>
+          {/* <p className="...mb-5 isolate border-2 border-sky-500 text-3xl font-bold text-gray-700 backdrop-opacity-10 transition-transform">
+            Modal Zone */}
+          {/* </p> */}
         </div>
         <div className="col-span-6">
           <p className="border-2 border-sky-500 text-lg text-gray-500">
