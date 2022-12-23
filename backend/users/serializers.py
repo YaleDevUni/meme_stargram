@@ -18,15 +18,19 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'first_name', 'last_name', 'email', 'password', 'is_admin', 'last_login', 'date_joined')
     
     def create(self, validated_data):
-        # Hashing password here
+        email = validated_data['email']
+        if not email:
+            raise ValueError('The Email must be set')
+        
         user = User.objects.create(**validated_data)
+
         user.set_password(user.password)
         user.save()
         return user
 
-    # def update(self, instance, validated_data):
-    #     instance.save()
-    #     return instance
+    def update(self, instance, validated_data):
+        instance.save()
+        return instance
 
     ###########################################################
     # TODO: Write authentication
