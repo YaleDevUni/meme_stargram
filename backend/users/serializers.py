@@ -8,20 +8,24 @@ class UserSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     email = serializers.CharField()
+    password = serializers.CharField()
     is_admin = serializers.BooleanField()
     last_login = serializers.DateTimeField()
     date_joined = serializers.DateTimeField()
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'is_admin', 'last_login', 'date_joined')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'is_admin', 'last_login', 'date_joined')
     
     def create(self, validated_data):
-        return User.objects.create(**validated_data)
+        # Hashing password here
+        user = User.objects.create(**validated_data)
+        user.set_password(user.password)
+        return user
 
-    def update(self, instance, validated_data):
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.save()
+    #     return instance
 
     ###########################################################
     # TODO: Write authentication

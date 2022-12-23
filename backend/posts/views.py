@@ -5,5 +5,5 @@ from .models import Post
 
 # Root
 class PostViewset(viewsets.ModelViewSet):
-    posts = Post.objects.all()
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
