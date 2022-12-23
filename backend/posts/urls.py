@@ -1,14 +1,7 @@
 from rest_framework import routers
-from . import views
+from .views import PostViewset
 
 router = routers.DefaultRouter()
-router.register(r'posts', views.PostViewset, basename='posts')
+router.register('posts', PostViewset, basename='posts')
 
 urlpatterns = router.urls
-
-# from django.urls import path
-# from . import views
-
-# urlpatterns = [
-#     path('all', views.PostSerializer),
-# ]

@@ -13,19 +13,19 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id','username','datetime','img_url','tag','description']
+        fields = ('id','username','datetime','img_url','tag','description')
     
-    def create(self, validated_data):
-        return Post.objects.create(**validated_data)
+    # def create(self, validated_data):
+    #     return Post.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        instance.img_url = validated_data.get('img_url', instance.img_url)
-        instance.tag = validated_data.get('tag', instance.tag)      # TODO: make tag as a hash
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     instance.img_url = validated_data.get('img_url', instance.img_url)
+    #     instance.tag = validated_data.get('tag', instance.tag)      # TODO: make tag as a hash
+    #     instance.save()
+    #     return instance
 
-    # TODO: make real url validation
-    def validate_img_url(self, value):
-        if len(value['img_url']) == 0:
-            raise serializers.ValidationError("Empty image URL given")
-        return value
+    # # TODO: make real url validation
+    # def validate_img_url(self, value):
+    #     if len(value['img_url']) == 0:
+    #         raise serializers.ValidationError("Empty image URL given")
+    #     return value
