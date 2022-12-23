@@ -7,7 +7,7 @@ function GroupList() {
   const [groups, setGroups] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  // fetch data from the local server to run the server pls check backend/readme.md
+  // fetch data from the local server to run the server pls check backend/readme.md !!
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
