@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
         # Hashing password here
         user = User.objects.create(**validated_data)
         user.set_password(user.password)
+        user.save()
         return user
 
     # def update(self, instance, validated_data):
