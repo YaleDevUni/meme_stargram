@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from models import Posting
+from .models import Post
 
 # https://www.django-rest-framework.org/tutorial/1-serialization/
 
-class PostingSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     username = serializers.CharField()                              # TODO: get current user's name
     datetime = serializers.DateTimeField()
@@ -12,11 +12,11 @@ class PostingSerializer(serializers.ModelSerializer):
     description = serializers.CharField(required=False)
 
     class Meta:
-        model = Posting
-        fields = ['id','name','datetime','img_url','tag','description']
+        model = Post
+        fields = ['id','username','datetime','img_url','tag','description']
     
     def create(self, validated_data):
-        return Posting.objects.create(**validated_data)
+        return Post.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.img_url = validated_data.get('img_url', instance.img_url)

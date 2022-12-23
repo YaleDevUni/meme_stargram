@@ -1,6 +1,6 @@
 from django.db import models
 
-class Posting(models.Model):
+class Post(models.Model):
     username = models.CharField(max_length=128, null=False, unique=False)
     datetime = models.DateTimeField(auto_now=True, auto_now_add=False)
     img_url = models.CharField(max_length=256, null=True)                   # Support only shortUrl?

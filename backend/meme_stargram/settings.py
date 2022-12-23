@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'api',
+    'posts',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# # Custom User model
+# # https://docs.djangoproject.com/en/4.1/topics/auth/customizing/#auth-custom-user
+# AUTH_USER_MODEL = 'users.CustomUser'
