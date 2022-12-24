@@ -11,7 +11,7 @@ function GroupList() {
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
-      await fetch('http://127.0.0.1:8000/api/groups/')
+      await fetch('http://127.0.0.1:8000/posts/')
         .then((resp) => resp.json())
         .then((data) => {
           setGroups(data);
