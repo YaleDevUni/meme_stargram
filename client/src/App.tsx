@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import GroupList from './components/group_list';
 
-
 function App() {
   return (
     <div className="container m-10 mx-auto rounded-xl border bg-gray-200 p-8 shadow">
