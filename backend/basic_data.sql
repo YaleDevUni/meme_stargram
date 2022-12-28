@@ -1,7 +1,7 @@
 INSERT INTO `users_user` ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'is_admin', 'last_login', 'date_joined') VALUES
 (1, 'Admin', 'ad' ,'ad', 'admin@Meme.ca', 'pbkdf2_sha256$390000$G2y4HR6noAhQZBYIDluxwY$rue9XD6vKsAr7yP87NRW3cxT/eaBNMqZorSLxyk3W2A=', 1, '2022-12-23 05:11:45.267801', '2022-12-23 05:11:45.533246');
 
-INSERT INTO `posts_post` ('id', 'username', 'datetime', 'img_url', 'description', 'tag')VALUES
+INSERT INTO `posts_post` ('id', 'username', 'datetime', 'img_url', 'description', 'tags')VALUES
 (1, 'number001', DATETIME('now'), 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png', 'pokemon', ''),
 (2, 'number002', DATETIME('now'), 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png', 'pokemon', ''),
 (3, 'number003', DATETIME('now'), 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png', 'pokemon', ''),
