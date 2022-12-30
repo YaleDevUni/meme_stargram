@@ -44,7 +44,10 @@ function GroupList() {
                 ></img>
                 <p>{group.description}</p>
                 <p className="text-red-600">{group.datetime}</p>
-                <p>this is my tag {group.tag}</p>
+                {group.tags &&
+                  group.tags.map((tag: any) => {
+                    return <p>{tag}</p>;
+                  })}
               </div>
             );
           })}
