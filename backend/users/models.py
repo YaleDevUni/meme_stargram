@@ -11,4 +11,3 @@ class User(AbstractUser):
     is_superuser = models.BooleanField()
     last_login = models.DateTimeField(auto_now_add=True)
     date_joined = models.DateTimeField(auto_now=True, auto_now_add=False)
-    # not used columns at the moment
