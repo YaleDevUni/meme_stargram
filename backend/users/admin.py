@@ -1,5 +1,8 @@
+from dataclasses import field
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 from .models import User
 
-admin.site.register(User, UserAdmin)
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    fields = ('username', 'first_name', 'last_name', 'email', 'is_admin', 'last_login', 'date_joined')
+    list_display = ('username', 'first_name', 'last_name', 'email', 'is_admin', 'last_login', 'date_joined')
