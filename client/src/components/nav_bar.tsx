@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { Hamberger } from './nav/hamberger';
+import { Link } from 'react-router-dom';
 
 type NavbarProps = {
   is_signed_in: boolean;
@@ -14,15 +16,13 @@ export const Navbar: FunctionComponent<NavbarProps> = ({
   return (
     <nav className="w-screen rounded border-gray-200 bg-white px-2 py-2.5 dark:bg-gray-900">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
-        <button>
-          <span className="flex-none items-center">
-            <div className="HAMBURGER-ICON space-y-2">
-              <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-              <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-              <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            </div>
+        <Hamberger />
+        {/* TODO: make Link router works */}
+        {/* <Link to="/" className="flex items-center px-8">
+          <span className="flex-none self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+            Meme Stargram
           </span>
-        </button>
+        </Link> */}
         <a href="#" className="flex items-center px-8">
           <span className="flex-none self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             Meme Stargram
@@ -76,22 +76,35 @@ export const Navbar: FunctionComponent<NavbarProps> = ({
                 Home
               </a>
             </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-              >
-                Account
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
-              >
-                Friends
-              </a>
-            </li>
+            {is_signed_in ? (
+              <>
+                <li>
+                  <a
+                    href="#"
+                    className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                  >
+                    Account
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                  >
+                    Friends
+                  </a>
+                </li>
+              </>
+            ) : (
+              <li>
+                <a
+                  href="#"
+                  className="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+                >
+                  Log In
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </div>
