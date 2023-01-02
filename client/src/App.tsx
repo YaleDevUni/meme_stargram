@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import GroupList from './components/group_list';
+import PostList from './components/posts_list';
 import { Navbar } from './components/nav_bar';
 import { Router } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ function App() {
         <p className="text-lg text-gray-500">
           React and Tailwind CSS in action
         </p>
-        <GroupList />
+        <PostList />
       </div>
     </>
   );
