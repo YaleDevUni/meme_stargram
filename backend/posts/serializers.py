@@ -1,3 +1,4 @@
+from taggit.serializers import (TagListSerializerField,TaggitSerializer)
 from rest_framework import serializers
 from .models import Post
 
@@ -8,12 +9,12 @@ class PostSerializer(serializers.ModelSerializer):
     username = serializers.CharField()                              # TODO: get current user's name
     datetime = serializers.DateTimeField()
     img_url = serializers.CharField()
-    tag = serializers.CharField()
+    tags = TagListSerializerField()
     description = serializers.CharField(required=False)
 
     class Meta:
         model = Post
-        fields = ('id','username','datetime','img_url','tag','description')
+        fields = '__all__'#('id','username','datetime','img_url','tags','description')
     
     # def create(self, validated_data):
     #     return Post.objects.create(**validated_data)
