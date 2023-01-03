@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-// import GroupList from './components/group_list';
+import GroupList from './group_list';
+import { userInfo } from 'os';
+// import { group } from 'console';
+// import { group } from 'console';
+// import group from './group_list';
 
 export default function Modal_ImgPopUp() {
   const [showModal, setShowModal] = React.useState(false);
+  const [groups, setGroups] = useState<any[]>([]);
   return (
     <>
       <button
@@ -34,13 +39,6 @@ export default function Modal_ImgPopUp() {
                   </p>
                 </div>
                 <div className="relative col-span-4 flex flex-initial flex-wrap justify-center p-6">
-                  {/* <img
-                    className="h-auto w-6/12 max-w-full rounded-full rounded-full object-scale-down px-4 sm:w-4/12"
-                    // type="button"
-                    src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
-                    width="100"
-                    height="100"
-                  /> */}
                   <div className="relative h-10 w-10 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600">
                     <svg
                       className="absolute -left-1 h-12 w-12 text-gray-400"
@@ -56,6 +54,7 @@ export default function Modal_ImgPopUp() {
                     </svg>
                   </div>
                   User ID Post information
+                  {/* {groups} */}
                   <img
                     className="aspect-video w-full object-scale-down"
                     // type="button"
