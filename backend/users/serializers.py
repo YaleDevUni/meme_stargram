@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.authtoken .models import Token
 from .models import User
 
 # https://www.django-rest-framework.org/tutorial/1-serialization/
@@ -25,7 +26,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(**validated_data)
 
         user.set_password(user.password)
+        
         user.save()
+        
+        Token.objects.create(user=user)
+        
         return user
 
     def update(self, instance, validated_data):
