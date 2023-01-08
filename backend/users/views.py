@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
+from .tokens import create_jwt_pair_for_user
 from .serializers import SignUpSerializer
 from rest_framework import generics, status
 from rest_framework.response import Response
@@ -7,9 +8,10 @@ from rest_framework.request import Request
 from rest_framework.views import APIView
 
 
+
 class SignUpView(generics.GenericAPIView):
     serializer_class=SignUpSerializer
-    
+    permission_classes = []
     def post(self,request:Request):
         
         data = request.data
@@ -27,7 +29,7 @@ class SignUpView(generics.GenericAPIView):
         return Response(data=serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
-    
+    permission_classes = []
     def post(self, request:Request):
         email = request.data.get('email')
         password = request.data.get("password")
@@ -35,9 +37,10 @@ class LoginView(APIView):
         user = authenticate(email=email,password=password)
         
         if user is not None:
+            tokens = create_jwt_pair_for_user(user)
             response ={
                 "message":"Login Successfully",
-                "token":user.auth_token.key
+                "tokens":tokens
             }
             return Response(data=response,status=status.HTTP_200_OK)
         else:
