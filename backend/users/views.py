@@ -12,7 +12,7 @@ class SignUpView(generics.GenericAPIView):
         data = request.data
         
         serializer = self.serializer_class(data=data)
-        print(serializer.is_valid())
+        # print(serializer.is_valid())
         if serializer.is_valid():
             print("entered here")
             serializer.save()

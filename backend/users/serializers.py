@@ -10,13 +10,15 @@ class SignUpSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["email","username","password"]
-        # not working for now, need solve it to avoid internal sever errors
-        # 
-        def validate(self, attrs):
-            email_exists=User.objects.filter(email=attrs["email"]).exists()
-            if email_exists:
-                raise ValidationError(_("Email has already been used"),code="invalid")
-            return super().validate(attrs)
+        
+    def validate(self, attrs):
+        email_exists=User.objects.filter(email=attrs["email"]).exists()
+        username_exists=User.objects.filter(username=attrs["username"]).exists()
+        if email_exists:
+            raise ValidationError("Email has already been used")
+        if username_exists:
+            raise ValidationError("Username has already been used")
+        return super().validate(attrs)
         
     # last_login = serializers.DateTimeField(auto_now_add=True)
     # date_joined = serializers.DateTimeField(auto_now=True, auto_now_add=False)
