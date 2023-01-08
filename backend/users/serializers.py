@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 from rest_framework.validators import ValidationError
 from .models import User
 
@@ -19,6 +20,13 @@ class SignUpSerializer(serializers.ModelSerializer):
         if username_exists:
             raise ValidationError("Username has already been used")
         return super().validate(attrs)
-        
+    
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        user = super().create(validated_data)
+        user.set_password(password)
+        user.save()
+        Token.objects.create(user=user)
+        return user
     # last_login = serializers.DateTimeField(auto_now_add=True)
     # date_joined = serializers.DateTimeField(auto_now=True, auto_now_add=False)
