@@ -6,5 +6,3 @@ router = routers.DefaultRouter()
 router.register('posts', PostViewset, basename='posts')
 
 urlpatterns = router.urls
-
-
