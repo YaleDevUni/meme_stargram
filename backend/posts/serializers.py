@@ -1,12 +1,13 @@
-from taggit.serializers import (TagListSerializerField,TaggitSerializer)
+from taggit.serializers import (TagListSerializerField, TaggitSerializer)
 from rest_framework import serializers
 from .models import Post
-
 # https://www.django-rest-framework.org/tutorial/1-serialization/
+
 
 class PostSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
-    username = serializers.CharField()                              # TODO: get current user's name
+    # TODO: get current user's name
+    username = serializers.CharField()
     datetime = serializers.DateTimeField()
     img_url = serializers.CharField()
     tags = TagListSerializerField()
@@ -14,8 +15,9 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = '__all__'#('id','username','datetime','img_url','tags','description')
-    
+        # ('id','username','datetime','img_url','tags','description')
+        fields = '__all__'
+
     # def create(self, validated_data):
     #     return Post.objects.create(**validated_data)
 

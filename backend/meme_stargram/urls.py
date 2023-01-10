@@ -22,5 +22,4 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('', include('users.urls')),
     path("auth/", include("users.urls")),
-
 ]
