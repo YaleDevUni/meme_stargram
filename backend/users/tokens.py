@@ -13,4 +13,4 @@ def create_jwt_pair_for_user(user: User):
         "refresh": str(refresh)
     }
 
-    return tokens 
+    return tokens
