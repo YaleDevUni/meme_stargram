@@ -5,11 +5,13 @@ from .models import Post
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, APIView
 from django.shortcuts import get_object_or_404
 
 
 # Root
+class PostsCreateView(APIView):
+    pass
 
 
 @api_view(http_method_names=["GET", "POST"])
@@ -45,6 +47,13 @@ def list_posts(request: Request):
 
 
 @api_view(http_method_names=["GET"])
+def random_posts(request: Request):
+    posts = Post.objects.all()[:11]
+    serializer = PostSerializer(instance=posts, many=True)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(http_method_names=["GET"])
 def post_detail(request: Request, post_id: int):
     post = get_object_or_404(Post, pk=post_id)
     serializer = PostSerializer(instance=post)
@@ -74,8 +83,3 @@ def delete_post(request: Request, post_id: int):
     post = get_object_or_404(Post, pk=post_id)
     post.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# class PostViewset(viewsets.ModelViewSet):
-#     queryset = Post.objects.all()
-#     serializer_class = PostSerializer
