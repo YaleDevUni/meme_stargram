@@ -4,7 +4,7 @@ from .models import Post
 # https://www.django-rest-framework.org/tutorial/1-serialization/
 
 
-class PostSerializer(serializers.ModelSerializer):
+class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
     # # TODO: get current user's name
     tags = TagListSerializerField()
 
