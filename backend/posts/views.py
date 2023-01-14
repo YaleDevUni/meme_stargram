@@ -10,27 +10,21 @@ from django.shortcuts import get_object_or_404
 
 
 # Root
-class PostsCreateView(APIView):
-    pass
+class PostView(APIView):
+    """_summary_
+    A View for Signed in User View.
+    Contains customized listing and creation posts 
+    """
+    serializer_class = PostSerializer
 
+    def get(self, request: Request, *args, **kwargs):
+        posts = Post.objects.all()
+        serializer = self.serializer_class(instance=posts, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-@api_view(http_method_names=["GET", "POST"])
-def hompage(request: Request):
-    if request.method == "POST":
+    def post(self, request: Request, *args, **kwargs):
         data = request.data
-        response = {"message": "this is my message from api", "data": data}
-        return Response(data=response, status=status.HTTP_201_CREATED)
-    response = {"message": "this is my message from api"}
-    return Response(data=response, status=status.HTTP_200_OK)
-
-
-@api_view(http_method_names=["GET", "POST"])
-def list_posts(request: Request):
-    posts = Post.objects.all()
-
-    if request.method == "POST":
-        data = request.data
-        serializer = PostSerializer(data=data)
+        serializer = self.serializer_class(data=data)
         if serializer.is_valid():
             serializer.save()
             response = {
@@ -38,12 +32,44 @@ def list_posts(request: Request):
                 "data": serializer.data
             }
             return Response(data=response, status=status.HTTP_201_CREATED)
-
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    serializer = PostSerializer(instance=posts, many=True)
 
-    return Response(data=serializer.data, status=status.HTTP_200_OK)
+class DeleteUpdateRetrievePostView(APIView):
+    serializer_class = PostSerializer
+
+    def get(self, request: Request, post_id: int):
+        post = get_object_or_404(Post, pk=post_id)
+        serializer = self.serializer_class(instance=post)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request: Request, post_id: int):
+        post = get_object_or_404(Post, pk=post_id)
+        data = request.data
+        serializer = self.serializer_class(instance=post, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            response = {
+                "message": "Post Updated",
+                "data": serializer.data
+            }
+            return Response(data=response, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request: Request, post_id: int):
+        post = get_object_or_404(Post, pk=post_id)
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GeneralPostView(APIView):
+    """_summary_
+    View for Unsigned User or General View.
+    Default Authentication Method is None, 
+    so do not grant here any post method 
+    """
+
+    pass
 
 
 @api_view(http_method_names=["GET"])
@@ -51,35 +77,3 @@ def random_posts(request: Request):
     posts = Post.objects.all()[:11]
     serializer = PostSerializer(instance=posts, many=True)
     return Response(data=serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(http_method_names=["GET"])
-def post_detail(request: Request, post_id: int):
-    post = get_object_or_404(Post, pk=post_id)
-    serializer = PostSerializer(instance=post)
-    response = {
-        "message": "data",
-        "data": serializer.data
-    }
-    return Response(data=response, status=status.HTTP_200_OK)
-
-
-@api_view(http_method_names=["PUT"])
-def update_post(request: Request, post_id: int):
-    post = get_object_or_404(Post, pk=post_id)
-    data = request.data
-    serializer = PostSerializer(instance=post, data=data)
-    if serializer.is_valid():
-        serializer.save()
-        response = {
-            "message": "Post Updated",
-            "data": serializer.data
-        }
-        return Response(data=response, status=status.HTTP_200_OK)
-
-
-@api_view(http_method_names=["DELETE"])
-def delete_post(request: Request, post_id: int):
-    post = get_object_or_404(Post, pk=post_id)
-    post.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)

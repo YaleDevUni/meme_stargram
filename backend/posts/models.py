@@ -3,7 +3,7 @@ from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
-    username = models.CharField(max_length=128, null=False, unique=True)
+    username = models.CharField(max_length=128, null=False,)
     datetime = models.DateTimeField(auto_now_add=True)
     img_url = models.CharField(max_length=2048, null=True)
     description = models.CharField(max_length=256, null=False, unique=False)
@@ -11,4 +11,4 @@ class Post(models.Model):
     tags = TaggableManager()
 
     def __str__(self) -> str:
-        return self.id
+        return self.img_url
