@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view, APIView
 from django.shortcuts import get_object_or_404
 
 
-# Root
+# Root .
 class PostView(APIView):
     """_summary_
     A View for Signed in User View.
