@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    'taggit',
+    # local apps
     'posts',
     'users'
 ]
@@ -55,6 +60,27 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'meme_stargram.urls'
+
+REST_FRAMEWORK = {
+    "NON_FIELD_ERRORS_KEY": "errors",
+    # "DEFAULT_AUTHENTICATION_CLASSES": (
+    #     "rest_framework.authentication.SessionAuthentication",
+    #     "rest_framework.authentication.TokenAuthentication",
+    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # ),
+    # "DEFAULT_PERMISSION_CLASSES": (
+    #     "rest_framework.permissions.IsAuthenticated",
+    # ),
+}
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+SIMPLE_JWT = {
+    # default algorithm is 'ALGORITHM': 'HS256'
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # by uncommenting this you have to use header types Bearer<token>
+    # 'SIGNING_KEY': SECRET_KEY,
+    # 'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 TEMPLATES = [
     {
@@ -76,6 +102,7 @@ WSGI_APPLICATION = 'meme_stargram.wsgi.application'
 # https://github.com/adamchainz/django-cors-headers
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://10.0.0.34:3000",
 ]
 
 # Database
