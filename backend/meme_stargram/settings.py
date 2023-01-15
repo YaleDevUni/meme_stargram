@@ -63,23 +63,23 @@ ROOT_URLCONF = 'meme_stargram.urls'
 
 REST_FRAMEWORK = {
     "NON_FIELD_ERRORS_KEY": "errors",
-    # "DEFAULT_AUTHENTICATION_CLASSES": (
-    #     "rest_framework.authentication.SessionAuthentication",
-    #     "rest_framework.authentication.TokenAuthentication",
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ),
-    # "DEFAULT_PERMISSION_CLASSES": (
-    #     "rest_framework.permissions.IsAuthenticated",
-    # ),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
 }
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     # default algorithm is 'ALGORITHM': 'HS256'
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    # by uncommenting this you have to use header types Bearer<token>
-    # 'SIGNING_KEY': SECRET_KEY,
-    # 'AUTH_HEADER_TYPES': ('Bearer',),
+    # by uncommenting this you have to use header types Bearer <token>
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 TEMPLATES = [

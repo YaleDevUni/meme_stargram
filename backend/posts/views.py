@@ -2,74 +2,68 @@ from django.shortcuts import render
 from .serializers import PostSerializer
 from rest_framework import viewsets
 from .models import Post
-from rest_framework import status
+from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.decorators import api_view, APIView
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
+from users.serializers import CurrentUserPostSerializer
+from rest_framework.permissions import (
+    IsAuthenticated,
+    AllowAny,
+    IsAuthenticatedOrReadOnly,
+    IsAdminUser,
+)
 
 
-# Root .
-class PostView(APIView):
-    """_summary_
-    A View for Signed in User View.
-    Contains customized listing and creation posts 
-    """
+class PostListCreateView(generics.GenericAPIView,
+                         mixins.ListModelMixin,
+                         mixins.CreateModelMixin):
     serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    queryset = Post.objects.all()
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        print(user)
+        serializer.save(author=user)
+        return super().perform_create(serializer)
 
     def get(self, request: Request, *args, **kwargs):
-        posts = Post.objects.all()
-        serializer = self.serializer_class(instance=posts, many=True)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+        print("test")
+        return self.list(request, *args, **kwargs)
 
     def post(self, request: Request, *args, **kwargs):
-        data = request.data
-        serializer = self.serializer_class(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            response = {
-                "message": "Post Created",
-                "data": serializer.data
-            }
-            return Response(data=response, status=status.HTTP_201_CREATED)
-        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.create(request, *args, **kwargs)
 
 
-class DeleteUpdateRetrievePostView(APIView):
+class DeleteUpdateRetrievePostView(generics.GenericAPIView,
+                                   mixins.RetrieveModelMixin,
+                                   mixins.UpdateModelMixin,
+                                   mixins.DestroyModelMixin):
+
     serializer_class = PostSerializer
 
-    def get(self, request: Request, post_id: int):
-        post = get_object_or_404(Post, pk=post_id)
-        serializer = self.serializer_class(instance=post)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    queryset = Post.objects.all()
 
-    def put(self, request: Request, post_id: int):
-        post = get_object_or_404(Post, pk=post_id)
-        data = request.data
-        serializer = self.serializer_class(instance=post, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            response = {
-                "message": "Post Updated",
-                "data": serializer.data
-            }
-            return Response(data=response, status=status.HTTP_200_OK)
-        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request: Request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-    def delete(self, request: Request, post_id: int):
-        post = get_object_or_404(Post, pk=post_id)
-        post.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def put(self, request: Request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request: Request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+# todo get filtered objects for signed in user
 
 
-class GeneralPostView(APIView):
-    """_summary_
-    View for Unsigned User or General View.
-    Default Authentication Method is None, 
-    so do not grant here any post method 
-    """
-
-    pass
+@api_view(http_method_names=["GET"])
+def get_posts_for_current_user(request: Request):
+    user = request.user
+    serializer = CurrentUserPostSerializer(instance=user)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(http_method_names=["GET"])
