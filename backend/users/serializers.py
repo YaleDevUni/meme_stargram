@@ -30,5 +30,11 @@ class SignUpSerializer(serializers.ModelSerializer):
         user.save()
         Token.objects.create(user=user)
         return user
-    # last_login = serializers.DateTimeField(auto_now_add=True)
-    # date_joined = serializers.DateTimeField(auto_now=True, auto_now_add=False)
+
+
+class CurrentUserPostSerializer(serializers.ModelSerializer):
+    posts = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = User
+        fields = ["id", "email", "username", "posts"]

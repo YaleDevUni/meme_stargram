@@ -1,12 +1,9 @@
-from rest_framework import routers
-# from .views import PostViewset, hompage
 from . import views
-from django.urls import path, include
+from django.urls import path
 
-# router = routers.DefaultRouter()
-# urlpatterns = router.urls
 urlpatterns = [
-    path("", views.PostView.as_view(), name="list_posts"),
-    path("<int:post_id>/", views.DeleteUpdateRetrievePostView.as_view(),
+    path("", views.PostListCreateView.as_view(), name="list_posts"),
+    path("<int:pk>/", views.DeleteUpdateRetrievePostView.as_view(),
          name="post_detail"),
+    path("current_user/", views.get_posts_for_current_user, name="current_user")
 ]
