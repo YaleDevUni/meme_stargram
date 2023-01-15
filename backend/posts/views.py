@@ -26,12 +26,13 @@ class PostListCreateView(generics.GenericAPIView,
 
     def perform_create(self, serializer):
         user = self.request.user
-        print(user)
+        # user_name = self.request.user.username
+        print(self.request.user.username)
         serializer.save(author=user)
+
         return super().perform_create(serializer)
 
     def get(self, request: Request, *args, **kwargs):
-        print("test")
         return self.list(request, *args, **kwargs)
 
     def post(self, request: Request, *args, **kwargs):
