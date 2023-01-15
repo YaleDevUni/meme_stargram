@@ -5,7 +5,7 @@ from .models import Post
 from rest_framework import status, generics, mixins
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework.decorators import api_view, APIView
+from rest_framework.decorators import api_view, APIView, permission_classes
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from users.serializers import CurrentUserPostSerializer
@@ -15,6 +15,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAdminUser,
 )
+from .permissions import AuthorOrReadOnly
 
 
 class PostListCreateView(generics.GenericAPIView,
@@ -43,9 +44,15 @@ class DeleteUpdateRetrievePostView(generics.GenericAPIView,
                                    mixins.RetrieveModelMixin,
                                    mixins.UpdateModelMixin,
                                    mixins.DestroyModelMixin):
-
+    """_summary_
+    example usage
+    api url: localhost:8000/posts/9/
+    post
+    update
+    delete
+    """
     serializer_class = PostSerializer
-
+    permission_classes = [AuthorOrReadOnly | IsAdminUser]
     queryset = Post.objects.all()
 
     def get(self, request: Request, *args, **kwargs):
@@ -57,10 +64,42 @@ class DeleteUpdateRetrievePostView(generics.GenericAPIView,
     def delete(self, request: Request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
+
+class PostsListForAuthor(generics.GenericAPIView,
+                         mixins.ListModelMixin):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        username = self.request. query_params. get("username") or None
+        queryset = Post.objects.all()
+        if username is not None:
+            return Post.objects.filter(author__username=username)
+        return queryset
+
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+class PostsListCurrentUser(generics.GenericAPIView,
+                           mixins.ListModelMixin):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Post.objects.filter(author=user)
+
+    def get(self, request: Request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
 # todo get filtered objects for signed in user
 
 
 @api_view(http_method_names=["GET"])
+@permission_classes([IsAuthenticated])
 def get_posts_for_current_user(request: Request):
     user = request.user
     serializer = CurrentUserPostSerializer(instance=user)
@@ -68,6 +107,7 @@ def get_posts_for_current_user(request: Request):
 
 
 @api_view(http_method_names=["GET"])
+@permission_classes([AllowAny])
 def random_posts(request: Request):
     posts = Post.objects.all()[:11]
     serializer = PostSerializer(instance=posts, many=True)
