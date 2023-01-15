@@ -5,7 +5,7 @@ from .models import Post
 
 
 class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
-    # # TODO: get current user's name
+    # # TODO: get current user's name.
     tags = TagListSerializerField()
 
     class Meta:
