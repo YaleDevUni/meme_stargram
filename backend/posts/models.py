@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    # username = models.CharField(max_length=24, null=True)
+    username = models.CharField(max_length=24, null=True)
     datetime = models.DateTimeField(auto_now_add=True)
     img_url = models.CharField(max_length=2048, null=False)
     description = models.CharField(max_length=2048, null=True)
