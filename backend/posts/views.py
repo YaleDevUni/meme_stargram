@@ -39,8 +39,9 @@ class PostListCreateView(generics.GenericAPIView,
     def perform_create(self, serializer):
         user = self.request.user
         # user_name = self.request.user.username
-        print(self.request.user.username)
-        serializer.save(author=user)
+        # user_name = self.request. query_params. get("username")
+        # print(self.request.user.username)
+        serializer.save(author=user, username=self.request.user.username)
 
         return super().perform_create(serializer)
 
