@@ -1,51 +1,40 @@
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
+from rest_framework.validators import ValidationError
 from .models import User
 
-# https://www.django-rest-framework.org/tutorial/1-serialization/
 
-class UserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
-    email = serializers.CharField()
-    password = serializers.CharField()
-    is_admin = serializers.BooleanField()
-    last_login = serializers.DateTimeField()
-    date_joined = serializers.DateTimeField()
+class SignUpSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length=128)
+    email = serializers.CharField(max_length=128)
+    password = serializers.CharField(min_length=8, write_only=True)
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'is_admin', 'last_login', 'date_joined')
-    
-    def create(self, validated_data):
-        email = validated_data['email']
-        if not email:
-            raise ValueError('The Email must be set')
-        
-        user = User.objects.create(**validated_data)
+        fields = ["email", "username", "password"]
 
-        user.set_password(user.password)
+    def validate(self, attrs):
+        email_exists = User.objects.filter(email=attrs["email"]).exists()
+        username_exists = User.objects.filter(
+            username=attrs["username"]).exists()
+        if email_exists:
+            raise ValidationError("Email has already been used")
+        if username_exists:
+            raise ValidationError("Username has already been used")
+        return super().validate(attrs)
+
+    def create(self, validated_data):
+        password = validated_data.pop("password")
+        user = super().create(validated_data)
+        user.set_password(password)
         user.save()
+        Token.objects.create(user=user)
         return user
 
-    def update(self, instance, validated_data):
-        instance.save()
-        return instance
 
-    ###########################################################
-    # TODO: Write authentication
-    #
-    # https://docs.djangoproject.com/en/4.1/topics/auth/default/
-    #
-    # from django.contrib.auth import authenticate
-    # user = authenticate(username='john', password='secret')
-    # if user is not None:
-    #     # A backend authenticated the credentials
-    # else:
-    #     # No backend authenticated the credentials
-    #
-    ###########################################################
+class CurrentUserPostSerializer(serializers.ModelSerializer):
+    posts = serializers.StringRelatedField(many=True)
 
-    ###########################################################
-    # TODO: Write validations
-    ###########################################################
+    class Meta:
+        model = User
+        fields = ["id", "email", "username", "posts"]

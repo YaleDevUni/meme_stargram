@@ -1,8 +1,10 @@
-from dataclasses import field
 from django.contrib import admin
+
 from .models import Post
 
+
+# Register your models here.
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    field = ('id','username','datetime','img_url','tag','description')
-    list_display = ('id','username','datetime','img_url','tag','description')
+    list_display = ["img_url", "datetime"]
+    # list_filter = ["created"]
