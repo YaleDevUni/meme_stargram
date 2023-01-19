@@ -1,6 +1,7 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
+import Modal_ImgPopUp from './modal';
 // import './App.css';
 // test
 function GroupList() {
@@ -29,25 +30,27 @@ function GroupList() {
   if (error) return <h1>Error</h1>;
   if (loading) return <h1>Loading</h1>;
   return (
-    <div className="container m-10 mx-auto rounded-xl border bg-green-200 p-12 shadow">
+    <div className="container m-10 mx-auto flex rounded-xl border bg-green-200 p-12 shadow">
+      <div className="flex"></div>
       <p className="text-lg text-blue-600">
-        {groups &&
-          groups.map((group) => {
-            return (
-              <div>
-                <p>user: {group.name}</p>
+        <div className="flex flex-wrap">
+          {groups &&
+            groups.map((group) => {
+              function setShowModal(arg0: boolean): void {
+                throw new Error('Function not implemented.');
+              }
+              return (
                 <img
+                  className="... aspect-square w-1/3"
                   src={group.img_url}
                   alt="test"
                   width="100"
                   height="100"
-                ></img>
-                <p>{group.description}</p>
-                <p className="text-red-600">{group.datetime}</p>
-                <p>this is my tag {group.tag}</p>
-              </div>
-            );
-          })}
+                  onClick={(src) => Modal_ImgPopUp()}
+                />
+              );
+            })}
+        </div>
       </p>
     </div>
   );

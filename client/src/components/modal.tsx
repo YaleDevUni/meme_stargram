@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import GroupList from './group_list';
 import { userInfo } from 'os';
-// import { group } from 'console';
-// import { group } from 'console';
-// import group from './group_list';
 
 export default function Modal_ImgPopUp() {
   const [showModal, setShowModal] = React.useState(false);
-  const [groups, setGroups] = useState<any[]>([]);
   return (
     <>
       <button
@@ -54,11 +50,12 @@ export default function Modal_ImgPopUp() {
                     </svg>
                   </div>
                   User ID Post information
-                  {/* {groups} */}
+                  {/* <p>user: {group.name}</p> */}
                   <img
                     className="aspect-video w-full object-scale-down"
                     // type="button"
                     src="https://i5.walmartimages.ca/images/Enlarge/094/514/6000200094514.jpg"
+                    // src=GroupList(groups.img_url)
                     width="100"
                     height="100"
                   />
