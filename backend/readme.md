@@ -14,6 +14,8 @@ Mainly focused on CRUD Image Post, Filtering Image Post.
 - Tagging on Posts
 - Class Based Views
 - Pagination
+- Get Current User Post
+- Get Specific User Post
 
 ### Authentication:
 - JWT authentication
