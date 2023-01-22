@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-// import { Navbar } from './components/nav_bar';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  redirect
-} from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { PostsList } from './features/posts/PostsList';
+import PostsList from './components/post_lists';
 
 function App() {
   return (
@@ -19,18 +12,7 @@ function App() {
         <p className="text-lg text-gray-500">
           React and Tailwind CSS in action
         </p>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <React.Fragment>
-                <PostsList />
-              </React.Fragment>
-            )}
-          />
-          <Redirect to="/" />
-        </Switch>
+        <PostsList />
       </div>
     </>
   );
