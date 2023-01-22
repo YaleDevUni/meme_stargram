@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
-import GroupList from './group_list';
-import { userInfo } from 'os';
+import group from './group_list';
+// import { userInfo } from 'os';
+function signal_setShowmModal_status(showModal: any) {
+  showModal = true;
+  return showModal;
+}
 
-export default function Modal_ImgPopUp() {
-  const [showModal, setShowModal] = React.useState(false);
+export default function Modal_ImgPopUp(props: any) {
+  const { group, showModal } = props;
+  const [show, setShow] = React.useState(showModal);
+
+  console.log('showModal', showModal);
+  console.log('show', show);
   return (
     <>
-      <button
-        className="rounded bg-blue-500 px-3 py-3 text-lg uppercase text-white"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Test Modal
-      </button>
+      {/* <button>
+        <img
+          className="...  aspect-square w-1/3 w-96 object-contain object-contain"
+          src={group.img_url}
+          alt="test"
+          width="100"
+          height="100"
+          onClick={() => updateHoistedState(showModal)}
+        />
+      </button> */}
+      {/* {signal_setShowmModal_status(showModal)} */}
+
       {showModal ? (
         <>
           <div className="fixed inset-0 top-0 left-0 right-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden p-60 outline-none focus:outline-none">
@@ -25,7 +38,7 @@ export default function Modal_ImgPopUp() {
                   <img
                     className="m-8 aspect-video w-full border-black object-scale-down"
                     // type="button"
-                    src="https://i5.walmartimages.ca/images/Enlarge/094/514/6000200094514.jpg"
+                    src={group.img_url}
                     width="100"
                     height="100"
                   />

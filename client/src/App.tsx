@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import GroupList from './components/group_list';
 import Modal from './components/modal';
-// import Navbar from './components/navbar';
 
+// import Navbar from './components/navbar';
+let test_var = 'my testhahahh';
 function App() {
   return (
     <div className="container m-10 mx-auto rounded-xl border bg-gray-200 p-8 shadow">
@@ -11,6 +12,7 @@ function App() {
       <p className="text-lg text-gray-500">React and Tailwind CSS in action</p>
       {/* <Navbar /> */}
       <Modal />
+
       <GroupList />
       {/* <div className="... columns-3">
         <img className="... aspect-video w-full" src="..." />
