@@ -32,15 +32,14 @@ class PostListCreateView(generics.GenericAPIView,
                          mixins.ListModelMixin,
                          mixins.CreateModelMixin):
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # change it after apply auth redux model in front end
+    # permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [AllowAny]
     pagination_class = CustomPaginator
     queryset = Post.objects.all()
 
     def perform_create(self, serializer):
         user = self.request.user
-        # user_name = self.request.user.username
-        # user_name = self.request. query_params. get("username")
-        # print(self.request.user.username)
         serializer.save(author=user, username=self.request.user.username)
 
         return super().perform_create(serializer)
@@ -64,7 +63,9 @@ class DeleteUpdateRetrievePostView(generics.GenericAPIView,
     delete
     """
     serializer_class = PostSerializer
-    permission_classes = [AuthorOrReadOnly | IsAdminUser]
+    # change it after apply auth redux model in front end
+    # permission_classes = [AuthorOrReadOnly | IsAdminUser]
+    permission_classes = [AllowAny]
     queryset = Post.objects.all()
 
     def get(self, request: Request, *args, **kwargs):
@@ -98,7 +99,9 @@ class PostsListCurrentUser(generics.GenericAPIView,
                            mixins.ListModelMixin):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    # change it after apply auth redux model in front end
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         user = self.request.user
@@ -109,7 +112,9 @@ class PostsListCurrentUser(generics.GenericAPIView,
 
 
 @api_view(http_method_names=["GET"])
-@permission_classes([IsAuthenticated])
+# change it after apply auth redux model in front end
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_posts_for_current_user(request: Request):
     user = request.user
     serializer = CurrentUserPostSerializer(instance=user)
