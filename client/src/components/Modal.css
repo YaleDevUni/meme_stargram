@@ -8,18 +8,18 @@
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 .modal {
   background-color: #ffffff;
   border: 1px solid #bebebe;
-  border-radius: 2px;
-  padding: 12px 16px;
+  border-radius: 20px;
+  padding: 120px 160px;
 }
 
 .modal-close {
-  position: absolute;
+  position: relative;
   right: 8px;
   top: 4px;
   font-size: 24px;
