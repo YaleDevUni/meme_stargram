@@ -29,7 +29,7 @@ function Navbar() {
             </svg>
           </button>
         </div>
-        <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center">
+        <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center ">
           <div className="text-sm lg:flex-grow">
             <a
               href="#responsive-header"
@@ -88,7 +88,6 @@ function Navbar() {
               </form>
             </a>
           </div>
-
           <div className="dropdown rounded-lg bg-purple-600">
             <button className="dropbtn">Hottest</button>
             <div className="dropdown-content">
