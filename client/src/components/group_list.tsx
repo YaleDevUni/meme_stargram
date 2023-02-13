@@ -1,6 +1,5 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import Modal from './modal';
 import { connect, ConnectedProps } from 'react-redux';
