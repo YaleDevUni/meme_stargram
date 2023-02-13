@@ -8,7 +8,7 @@ type ModalState = {
 
 const initialState: ModalState = {
   modal: null
-}; 
+};
 
 function modalReducer(state = initialState, action: ModalAction): ModalState {
   switch (action.type) {
