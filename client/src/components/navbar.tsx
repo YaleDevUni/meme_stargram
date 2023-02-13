@@ -75,7 +75,7 @@ function Navbar() {
                     type="search"
                     id="default-search"
                     className="block w-full rounded-lg border border-gray-300 bg-white p-4 pl-10 text-sm text-gray-900 focus:border-purple-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-purple-500"
-                    placeholder="Put your tag"
+                    placeholder="Put your tag!!"
                     required
                   />
                   <button
