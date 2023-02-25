@@ -11,18 +11,18 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = {
-  dispatchShowModal: hideModal
+  dispatchCloseModal: hideModal
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 const Modal = (props: ModalProps) => {
-  const { dispatchShowModal, modalProps } = props;
+  const { dispatchCloseModal, modalProps } = props;
 
   useEffect(() => {
     const escPressed = (event: KeyboardEvent) => {
       if (event.keyCode === 27) {
-        dispatchShowModal();
+        dispatchCloseModal();
       }
     };
     window.addEventListener('keydown', escPressed);
@@ -32,18 +32,24 @@ const Modal = (props: ModalProps) => {
   }, []);
 
   return modalProps ? (
-    <div className="modal-overlay">
+    <>
+      <div className="modal-overlay" onClick={dispatchCloseModal} />
       <div className="modal">
-        <h1>{modalProps.user}</h1>
-        <p>{modalProps.description}</p>
-        <img src={modalProps.imglink} alt="test" width="300" height="300"></img>
-        <p>{modalProps.datetime}</p>
-        <p>{modalProps.tag}</p>
-        <span className="modal-close" onClick={dispatchShowModal}>
-          &#10005; {/* HTML code for a multiplication sign */}
-        </span>
+        <div className="modal-left">
+          <img className="modal-image" src={modalProps.imglink} />
+        </div>
+        <div className="modal-right">
+          {/* TODO: make close button as a component to be used in different places */}
+          <span className="modal-close" onClick={dispatchCloseModal}>
+            &#10005;
+          </span>
+          <div className="modal-profile">{modalProps.user}</div>
+          <div className="modal-date">{modalProps.datetime}</div>
+          <div className="modal-tags">{modalProps.tag}</div>
+          <div className="modal-description">{modalProps.description}</div>
+        </div>
       </div>
-    </div>
+    </>
   ) : null;
 };
 
