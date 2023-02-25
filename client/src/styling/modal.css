@@ -5,6 +5,8 @@
   right: 0;
   bottom: 0;
   left: 0;
+  height: 100vh;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -14,7 +16,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 50;
-  width: 960px;
+  width: 960px; /* TODO: responsive size for mobile environment by using media function */
   height: 600px;
   max-width: 100%;
   background-color: #ffffff;
@@ -29,9 +31,11 @@
 
 .modal-left {
   display: flex;
-  flex-grow: 2;
+  flex-grow: 1.5;
   justify-content: center;
   align-items: center;
+  padding: 2em 1em;
+  max-width: 66%;
 }
 
 .modal-image {
@@ -45,17 +49,28 @@
   flex-direction: column;
   flex-wrap: wrap;
   flex-grow: 1;
+  padding: 1em;
+  max-width: 34%;
 }
 
 .modal-profile {
-  max-height: 30px;
+  flex-grow: 1;
   height: 30px;
 }
+
 .modal-date {
+  flex-grow: 1;
 }
+
+.modal-comment {
+  flex-grow: 2;
+}
+
 .modal-tags {
+  flex-grow: 1;
 }
 .modal-description {
+  flex-grow: 1;
 }
 
 .modal-close {

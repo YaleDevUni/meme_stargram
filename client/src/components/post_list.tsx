@@ -1,9 +1,9 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Modal from './modal';
+import Modal from './modal/modal';
 import { connect, ConnectedProps } from 'react-redux';
-import { showModal } from '../store/actions';
+import { showModal } from 'store/actions';
 
 const mapDispatchToProps = {
   dispatchShowModal: showModal
