@@ -4,20 +4,19 @@ import ReactDOM from 'react-dom';
 import Modal from './modal';
 import { connect, ConnectedProps } from 'react-redux';
 import { ModalActionTypes, showModal } from '../store/actions';
-import ModalProperties from '../interfaces/modal-properties';
+
 const mapDispatchToProps = {
   dispatchShowModal: showModal
 };
 const connector = connect(undefined, mapDispatchToProps);
 type AppProps = {} & ConnectedProps<typeof connector>;
-// import './App.css';
-// test
 
 function PostList(props: AppProps) {
   const { dispatchShowModal } = props;
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false); // fetch data from the local server to run the server pls check backend/readme.md !!
+
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
@@ -36,8 +35,11 @@ function PostList(props: AppProps) {
     };
     getData();
   }, []);
+
   if (error) return <h1>Error</h1>;
+
   console.log('is loading', loading);
+
   if (loading) return <h1>Loading</h1>;
   return (
     <div className="container m-10 mx-auto rounded-xl border bg-green-200 p-12 shadow">
@@ -48,12 +50,12 @@ function PostList(props: AppProps) {
           posts.map((post) => {
             return (
               <div>
-                <p>user: {post.author}</p>
+                <p>user: {post.username}</p>
                 <button
                   className="text-black-1200 text-lg"
                   onClick={() => {
                     dispatchShowModal({
-                      user: post.author,
+                      user: post.username,
                       description: post.description,
                       imglink: post.img_url,
                       datetime: post.datetime,

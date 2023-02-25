@@ -1,11 +1,17 @@
 import React from 'react';
-import './Modal.css';
+import '../styling/modal.css';
 import { connect, ConnectedProps } from 'react-redux';
 import { hideModal } from '../store/actions';
 import { RootState } from '../store/reducers';
-// interface ModalProps {
-//   onCloseButtonClick: () => void;
-// }
+
+interface Modal {
+  user: string;
+  imglink: string;
+  description: string;
+  datetime: string;
+  tag: string;
+}
+
 const mapStateToProps = (state: RootState) => ({
   modal: state.modal.modal
 });
@@ -18,12 +24,15 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type ModalProps = {} & ConnectedProps<typeof connector>;
 function Modal(props: ModalProps) {
   const { dispatchHideModal, modal } = props;
+
   if (!modal) {
     return null;
   }
+
   const onCloseButtonClick = () => {
     dispatchHideModal();
   };
+
   return (
     <div className="modal-overlay">
       <div className="modal">
