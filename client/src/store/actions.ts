@@ -1,23 +1,20 @@
 import ModalProperties from '../interfaces/modal-properties';
-export enum ModalActionTypes {
-  ShowModal,
-  HideModal
-}
 
 export interface ModalAction {
-  type: ModalActionTypes;
+  type: string;
   payload?: ModalProperties;
 }
 
 export function showModal(payload: ModalProperties): ModalAction {
   return {
-    type: ModalActionTypes.ShowModal,
+    type: 'showModal',
     payload
   };
 }
 
 export function hideModal(): ModalAction {
+  console.log('close modal');
   return {
-    type: ModalActionTypes.HideModal
+    type: 'hideModal'
   };
 }

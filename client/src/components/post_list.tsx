@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from './modal';
 import { connect, ConnectedProps } from 'react-redux';
-import { ModalActionTypes, showModal } from '../store/actions';
+import { showModal } from '../store/actions';
 
 const mapDispatchToProps = {
   dispatchShowModal: showModal
@@ -86,4 +86,3 @@ function PostList(props: AppProps) {
 }
 // test
 export default connector(PostList);
-// ReactDOM.render(<PostList />, '#yourAppElement');
