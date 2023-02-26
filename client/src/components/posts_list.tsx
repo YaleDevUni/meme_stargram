@@ -30,31 +30,39 @@ function PostList(props: AppProps) {
     getData();
   }, []);
 
-  if (error) return <h1>Error</h1>;
+  // TODO: Should handle this better way with error handling
+  // if (error) return <h1>Error</h1>;
+  // if (loading) return <h1>Loading</h1>;
 
-  if (loading) return <h1>Loading</h1>;
   return (
     <div className="posts-list">
       <Modal />
       {posts &&
-        posts.map((post) => {
+        posts.map((post, index) => {
           return (
-            <div>
-              <button
-                className="text-black-1200 text-lg"
-                onClick={() => {
-                  dispatchShowModal({
-                    user: post.username,
-                    description: post.description,
-                    imglink: post.img_url,
-                    datetime: post.datetime,
-                    tag: post.tags
-                  });
-                }}
-              >
-                <img className="h-60 w-60" src={post.img_url} alt="test" />
-              </button>
-            </div>
+            <>
+              <div className="post-image">
+                <button
+                  className="post-image_button"
+                  onClick={() => {
+                    dispatchShowModal({
+                      user: post.username,
+                      description: post.description,
+                      imglink: post.img_url,
+                      datetime: post.datetime,
+                      tag: post.tags
+                    });
+                  }}
+                >
+                  <img
+                    className="post-image_image"
+                    src={post.img_url}
+                    alt="test"
+                  />
+                </button>
+              </div>
+              {index % 3 === 2 ? <div className="break" /> : null}
+            </>
           );
         })}
     </div>

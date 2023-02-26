@@ -23,7 +23,7 @@ class CustomPaginator(PageNumberPagination):
     """_summary_
     Custom pagination class
     """
-    page_size = 5
+    page_size = 20
     page_query_param = "page"
     page_size_query_param = "page_size"
 
