@@ -1,6 +1,6 @@
 import temp_logo from './temp_log.png';
-import { default as logo } from '../../public/temp_log.svg';
-import './dropdown.css';
+import { default as logo } from 'public/temp_log.svg';
+import '../styling/dropdown.css';
 
 function Navbar() {
   return (

@@ -1,23 +1,16 @@
-// import React from 'react';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Modal from './modal';
+import Modal from './modal/modal';
 import { connect, ConnectedProps } from 'react-redux';
-import { ModalActionTypes, showModal } from '../store/actions';
-import ModalProperties from '../interfaces/modal-properties';
-const mapDispatchToProps = {
-  dispatchShowModal: showModal
-};
-const connector = connect(undefined, mapDispatchToProps);
-type AppProps = {} & ConnectedProps<typeof connector>;
-// import './App.css';
-// test
+import { showModal } from 'store/actions';
+import 'styling/posts_list.css';
 
 function PostList(props: AppProps) {
   const { dispatchShowModal } = props;
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false); // fetch data from the local server to run the server pls check backend/readme.md !!
+
   useEffect(() => {
     setLoading(true);
     const getData = async () => {
@@ -36,24 +29,24 @@ function PostList(props: AppProps) {
     };
     getData();
   }, []);
-  if (error) return <h1>Error</h1>;
-  console.log('is loading', loading);
-  if (loading) return <h1>Loading</h1>;
-  return (
-    <div className="container m-10 mx-auto rounded-xl border bg-green-200 p-12 shadow">
-      <Modal />
 
-      <p className="text-lg text-blue-600">
-        {posts &&
-          posts.map((post) => {
-            return (
-              <div>
-                <p>user: {post.author}</p>
+  // TODO: Should handle this better way with error handling
+  // if (error) return <h1>Error</h1>;
+  // if (loading) return <h1>Loading</h1>;
+
+  return (
+    <div className="posts-list">
+      <Modal />
+      {posts &&
+        posts.map((post, index) => {
+          return (
+            <>
+              <div className="post-image">
                 <button
-                  className="text-black-1200 text-lg"
+                  className="post-image_button"
                   onClick={() => {
                     dispatchShowModal({
-                      user: post.author,
+                      user: post.username,
                       description: post.description,
                       imglink: post.img_url,
                       datetime: post.datetime,
@@ -62,26 +55,24 @@ function PostList(props: AppProps) {
                   }}
                 >
                   <img
+                    className="post-image_image"
                     src={post.img_url}
                     alt="test"
-                    width="100"
-                    height="100"
-                  ></img>
+                  />
                 </button>
-
-                <p>{post.description}</p>
-                <p className="text-red-600">{post.datetime}</p>
-                {post.tags &&
-                  post.tags.map((tag: any) => {
-                    return <p>{tag}</p>;
-                  })}
               </div>
-            );
-          })}
-      </p>
+              {index % 3 === 2 ? <div className="break" /> : null}
+            </>
+          );
+        })}
     </div>
   );
 }
-// test
+
+const mapDispatchToProps = {
+  dispatchShowModal: showModal
+};
+const connector = connect(undefined, mapDispatchToProps);
+type AppProps = {} & ConnectedProps<typeof connector>;
+
 export default connector(PostList);
-// ReactDOM.render(<PostList />, '#yourAppElement');
