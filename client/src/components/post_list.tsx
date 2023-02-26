@@ -38,7 +38,7 @@ function PostList(props: AppProps) {
 
   if (error) return <h1>Error</h1>;
 
-  console.log('is loading', loading);
+  // console.log('is loading', loading);
 
   if (loading) return <h1>Loading</h1>;
   return (

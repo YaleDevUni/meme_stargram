@@ -3,7 +3,7 @@ import { useEffect, ReactElement, ReactNode } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { hideModal } from 'store/actions';
 import { RootState } from 'store/reducers';
-import { renderButtons } from './modal_buttons';
+import { closeButtons, renderButtons } from './modal_buttons';
 
 const Modal = (props: ModalProps): ReactElement | null => {
   const { dispatchCloseModal, modalProps } = props;
@@ -39,10 +39,16 @@ const Modal = (props: ModalProps): ReactElement | null => {
         </div>
         <div className="modal-right">
           {/* TODO: make close button as a component to be used in different places */}
-          <span className="modal-close" onClick={dispatchCloseModal}>
-            &#10005;
-          </span>
-          <div className="modal-profile">{modalProps.user}</div>
+          {closeButtons(dispatchCloseModal)}
+          <div className="modal-profile">
+            <div className="modal-profile_image">
+              <img
+                className="rounded-full border-none"
+                src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
+              />
+            </div>
+            <div className="modal-profile_text">{modalProps.user}</div>
+          </div>
           {/* <div className="modal-comment">{modalProps.comments}</div> */}
           <div className="modal-comment">
             <ul>{createMockList()}</ul>
@@ -55,7 +61,7 @@ const Modal = (props: ModalProps): ReactElement | null => {
           {/* <div className="modal-tags">{modalProps.tag}</div> */}
           {/* <div className="modal-description">{modalProps.description}</div> */}
 
-          <div>{renderButtons()}</div>
+          <div className="modal-buttons">{renderButtons()}</div>
         </div>
       </div>
     </>
