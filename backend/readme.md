@@ -1,9 +1,37 @@
-Temporary post api: http://127.0.0.1:8000/api/posts/
+# *Before Deploying make sure change SECRETE KEY in settings.py*
+# About meme_stargram backend
+
+Our goal is building secured and fast api server by using Django with Rest Framework.
+Mainly focused on CRUD Image Post, Filtering Image Post.
+
+# Currently Implemented:
+### On User model:
+- Register 
+- Loging
+
+### On Post model:
+- CRUD Posts
+- Tagging on Posts
+- Class Based Views
+- Pagination
+- Get Current User Post
+- Get Specific User Post
+
+### Authentication:
+- JWT authentication
+
+### TODO:
+- Filter posts by tagging
+- Following other user
+- Recommand User Favorite Meme posts
+- Support WebP image Format 
+
+
 
 To insert very basic data into db, please run this AFTER migration
 `sqlite3 db.sqlite3 < ./basic_data.sql`
 
-To run backend
+# To run backend locally
 
 ```
 sh run.sh
