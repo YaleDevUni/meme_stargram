@@ -1,26 +1,25 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import ModalProperties from '../interfaces/modal-properties';
-import { ModalAction, ModalActionTypes } from './actions';
+import { ModalAction } from './actions';
 
 type ModalState = {
-  modal: ModalProperties | null | undefined;
+  modalProps: ModalProperties | undefined;
 };
 
 const initialState: ModalState = {
-  modal: null
+  modalProps: undefined
 };
 
 function modalReducer(state = initialState, action: ModalAction): ModalState {
   switch (action.type) {
-    case ModalActionTypes.ShowModal:
+    case 'showModal':
       return {
         ...state,
-        modal: action.payload
+        modalProps: action.payload
       };
-    case ModalActionTypes.HideModal:
+    case 'hideModal':
       return {
-        ...state,
-        modal: null
+        modalProps: undefined
       };
     default:
       return state;

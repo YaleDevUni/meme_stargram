@@ -4,5 +4,8 @@ interface ModalProperties {
   description: string;
   datetime: string;
   tag: string;
+  // For future work to add like and comment(new type).
+  // like: number;
+  // comment: Comment;
 }
 export default ModalProperties;
